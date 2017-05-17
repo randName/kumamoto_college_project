@@ -52,8 +52,21 @@ class KUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def __repr__(self):
+        return '<User %s>' % self.email
+
     def get_full_name(self):
         return '%s %s' % (self.given_name, self.family_name.upper())
 
     def get_short_name(self):
         return self.given_name
+
+    @property
+    def details(self):
+        return {
+            'email': self.email,
+            'given_name': self.given_name,
+            'family_name': self.family_name,
+            'middle_name': self.middle_name,
+            'full_name': self.get_full_name(),
+        }

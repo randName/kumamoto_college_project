@@ -1,4 +1,5 @@
 from io import BytesIO
+from datetime import date
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase import pdfmetrics, ttfonts
@@ -87,6 +88,7 @@ class PdfForm(object):
 
     def date(self, posses):
         def gen(d):
+            if not isinstance(d, date): return
             for k, v in posses.items():
                 self.d.string(v, d.strftime(k))
         return gen
